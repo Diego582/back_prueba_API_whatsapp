@@ -1,26 +1,13 @@
-import { Router } from "express";
+import express from "express";
+import create from "../controllers/whatsapp/create.js";
 
-const router = Router();
+const router = express.Router();
 
-// Ruta de prueba
-router.get("/", (req, res) => {
-  res.send("Ruta principal de WhatsApp API");
-});
+//router.get("/", read);
+router.post("/", create);
 
-// Ruta simulada para enviar mensaje
-router.post("/send", (req, res) => {
-  const { to, message } = req.body;
-
-  if (!to || !message) {
-    return res
-      .status(400)
-      .json({ error: "Faltan campos obligatorios: to, message" });
-  }
-
-  // Lógica de envío (simulada por ahora)
-  console.log(`Enviando mensaje a ${to}: ${message}`);
-
-  res.status(200).json({ success: true, to, message });
-});
+//router.get("/:id", readOne);
+//router.put("/:id", update);
+//router.delete("/:id", destroy);
 
 export default router;
