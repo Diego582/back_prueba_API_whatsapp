@@ -2,8 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import apiRoutes from "./routes/index.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +16,7 @@ app.use(express.json());
 
 // Ruta de prueba
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando correctamente ✅");
+  res.send("Servidor funcionando con MONGO correctamente ✅");
 });
 
 app.use("/api", apiRoutes);
