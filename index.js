@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import apiRoutes from "./routes/index.js";
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Servidor funcionando correctamente ✅");
 });
+
+app.use("/api", apiRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {
