@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import apiRoutes from "./routes/index.js";
 import connectDB from "./config/db.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config();
 connectDB();
@@ -21,7 +22,10 @@ app.get("/", (req, res) => {
 
 app.use("/api", apiRoutes);
 
+app.use(errorHandler);
+
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
