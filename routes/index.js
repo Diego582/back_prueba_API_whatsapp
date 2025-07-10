@@ -5,7 +5,7 @@ import whatsappRoutes from "./whatsapp.js";
 const router = Router();
 
 // Agrupás cada grupo de rutas bajo un prefijo
-router.use("/whatsapp", whatsappRoutes);
+router.use("/webhook", whatsappRoutes);
 // router.use('/otra', otrasRutas);
 
 export default router;
