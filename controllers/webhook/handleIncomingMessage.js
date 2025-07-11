@@ -1,3 +1,6 @@
+import { sendWhatsAppMessage } from "../../services/whatsappService.js";
+import { fixArgentinianPhone } from "../../utils/phoneUtils.js";
+
 export default async (req, res, next) => {
     try {
 
@@ -35,7 +38,26 @@ export default async (req, res, next) => {
                     console.log("🙋‍♂️ Nombre:", name);
                     console.log("💬 Texto:", text);
 
-                    // Acá podés responder, guardar, registrar en base de datos, etc.
+                    if (message) {
+                        console.log("💬 Texto:", message);
+                        const from = fixArgentinianPhone(message.from);
+                        const text = message.text?.body?.toLowerCase() || "";
+                        ;
+                        let reply;
+
+                        if (text.includes("hola")) {
+                            reply = "¡Hola! ¿Cómo estás? 😊";
+                        } else if (text.includes("gracias")) {
+                            reply = "¡De nada! Siempre listo para ayudarte 🤖";
+                        } else if (text.includes("chau") || text.includes("adiós")) {
+                            reply = "¡Hasta luego! 👋 Que tengas un gran día.";
+                        } else {
+                            reply = "No entendí tu mensaje 😅. Podés escribirme 'hola' o 'gracias'.";
+                        }
+
+
+                        await sendWhatsAppMessage(from, reply);
+                    }
                 }
             }
         }
